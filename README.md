@@ -1,3 +1,0 @@
-# oracle-blog-examples
-Code snippets from examples in my Oracle Blog
-https://blogs.oracle.com/OracleWebCenterSuite
