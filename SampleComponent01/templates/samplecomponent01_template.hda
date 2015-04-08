@@ -1,0 +1,19 @@
+﻿<?hda version="11gR1-11.1.1.5.0-idcprod1-110413T184243" jcharset=UTF8 encoding=utf-8?>
+@Properties LocalData
+blFieldTypes=
+blDateFormat=M/d{/yy}{ h:mm[:ss]{ a}}!mAM,PM!tAmerica/New_York
+@end
+@ResultSet SampleComponent01_Templates
+5
+name
+class
+formtype
+filename
+description
+SC01_CONTENT_TYPES
+Pages
+DocumentInfoPage
+SampleComponent01_content_types.htm
+List of Content Types
+@end
+

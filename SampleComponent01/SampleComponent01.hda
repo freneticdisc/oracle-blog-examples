@@ -1,0 +1,57 @@
+﻿<?hda version="11gR1-11.1.1.5.0-idcprod1-110413T184243" jcharset=UTF8 encoding=utf-8?>
+@Properties LocalData
+blFieldTypes=
+preventAdditionalComponentDowngrade=0
+hasPreferenceData=0
+blDateFormat=M/d{/yy}{ h:mm[:ss]{ a}}!mAM,PM!tAmerica/New_York
+ComponentName=SampleComponent01
+version=2012_02_15(build 1)
+@end
+@ResultSet ClassAliases
+3
+classname
+location
+loadOrder
+@end
+@ResultSet Filters
+4
+type
+location
+parameter
+loadOrder
+@end
+@ResultSet ResourceDefinition
+4
+type
+filename
+tables
+loadOrder
+resource
+resources/samplecomponent01_resource1.htm
+null
+10
+query
+resources/samplecomponent01_query.htm
+SampleComponent01_Queries
+10
+service
+resources/samplecomponent01_service.htm
+SampleComponent01_Services
+10
+template
+templates/samplecomponent01_template.hda
+null
+10
+@end
+@ResultSet MergeRules
+4
+fromTable
+toTable
+column
+loadOrder
+SampleComponent01_Templates
+IntradocTemplates
+name
+10
+@end
+

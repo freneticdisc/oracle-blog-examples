@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>
+SampleComponent01 htmlIncludeOrString</head>
+<body>
+
+<@dynamicdata CoreMenuItems@>
+    id,             label,                      linkType,   linkData
+    SC01_LINKS,     Sample Component 01 Links,  ,
+    SC01_TREE,      Tree Parent, 				,
+    SC01_TCH01,     Content Types,              cgi,   		IdcService=SC01_GET_DOCTYPES
+    GOOGLE,         Google,                     external,   http://www.google.com
+    APPLE,          Apple,                      external,   http://www.apple.com
+<@end@>
+
+<@dynamicdata CoreMenuItemRelationships@>
+<?commatable mergeKey="primaryKey"?>
+    parentId,   id,         loadOrder
+    MENU_B,     SC01_LINKS, 1000
+    SC01_LINKS, SC01_TREE,  10
+    SC01_TREE,  SC01_TCH01,  20
+    SC01_TREE, 	GOOGLE,     30
+    SC01_LINKS, APPLE,      40
+<@end@>
+
+<@dynamicdata CoreMenuItemsFlags@>
+    id,         flags
+    SC01_LINKS, isLoggedIn
+    SC01_TREE,  isLoggedIn
+    SC01_TCH01, isLoggedIn
+    GOOGLE,     isLoggedIn
+    APPLE,      isLoggedIn
+<@end@>
+
+<@dynamicdata CoreMenuItemsImages@>
+    id,         image,                imageOpen
+    SC01_TREE,  WebFolder_closed.gif, WebFolder_open.gif
+    SC01_TCH01, ScsPageItem.gif,
+    GOOGLE,     WebItem.gif,
+    APPLE,      WebItem.gif,
+<@end@>
+
+</body>
+</html>

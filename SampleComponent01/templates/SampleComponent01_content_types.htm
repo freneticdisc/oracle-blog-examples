@@ -1,0 +1,35 @@
+<html>
+<head>
+	<$defaultPageTitle="List of Content Types"$>
+	<$include std_html_head_declarations$>
+</head>
+
+<$include body_def$>
+
+<$include std_page_begin$>
+
+<$include std_header$>
+
+<table>
+<tr>
+	<td colspan=3 align=center>
+		<h4>The Content Types Table</h4></td>
+</tr>
+<tr>
+	<td><strong>Content Type</strong></td>
+	<td><strong>Description</strong></td>
+	<td><strong>Image</strong></td>
+</tr>
+<$loop SC01DOCTYPES$>
+<tr>
+	<td><$dDocType$></td>
+	<td><$dDescription$></td>
+	<td><$dGif$></td>
+</tr>
+<$endloop$>
+</table>
+
+<$include std_page_end$>
+
+</body>
+</html>
