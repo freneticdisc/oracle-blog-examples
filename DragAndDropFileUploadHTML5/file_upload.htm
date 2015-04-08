@@ -1,0 +1,199 @@
+﻿<html>
+	<head>
+		<title>Drag and Drop file Uploader for WebCenter Content</title>
+		<link rel="stylesheet" href="http://yui.yahooapis.com/3.9.0/build/cssgrids/cssgrids-min.css">
+		<link rel="stylesheet" href="http://yuilibrary.com/combo/css?main-min.css">
+		<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+	</head>
+	<body>
+		<div class="example yui3-skin-sam">
+			<style>
+				#filelist {
+					margin-top: 15px;
+				}
+		
+				#uploadFilesButtonContainer, #selectFilesButtonContainer, #overallProgress {
+					display: inline-block;
+				}
+		
+				#overallProgress {
+					float: right;
+				}
+				
+				.yellowBackground {
+				  background: #F2E699;
+				}
+				
+				.serverdata {
+				  font-size: 0.8em;
+				}
+			</style>
+			
+			<div id="wccFormContainer" style="width: 75%;">
+				<div id="headerContainer">
+					<h2>Metadata</h2>
+				</div>
+				<div id="textContainer">
+					Enter the following metadata here. Other metadata like the document type and security group are set in the code. You can add those fields here if you want to.
+				</div>
+				<div>&nbsp;</div>
+				<div id="formContainer">
+					<div>
+						<label>Custom Metadata (xCustomMetadata):</label>
+						<input id="xCustomMetadata" size="50" value="">
+					</div>
+					<div>
+						<label>Document Title (dDocTitle):</label>
+						<input id="dDocTitle" size="50" value="YUI 3 HTML 5 Test">
+					</div>
+				</div>
+			</div>
+			<div id="exampleContainer" style="width: 75%;">
+				<div id="headerContainer">
+					<h2>File Uploader</h2>
+				</div>
+				<div id="uploaderContainer">
+					<div id="selectFilesButtonContainer">
+					</div>
+					<div id="uploadFilesButtonContainer">
+					  <button type="button" id="uploadFilesButton"
+							  class="yui3-button" style="width:250px; height:35px;">Upload Files</button>
+					</div>
+					<div id="overallProgress">
+					</div>
+				</div>
+				
+				<div id="filelist">
+				  <table id="filenames">
+					<thead>
+					   <tr><th>File name</th><th>File size</th><th>Percent uploaded</th><th>Data from Server</th></tr>
+					   <tr id="nofiles">
+						<td colspan="4" id="ddmessage">
+							<strong>No files selected.</strong>
+						</td>
+					   </tr>
+					</thead>
+					<tbody>
+					</tbody>
+				  </table>
+				</div>
+			</div>
+		
+			<script>
+				YUI({filter:"raw"}).use("uploader", "json-parse", function(Y) {
+				Y.one("#overallProgress").set("text", "Uploader type: " + Y.Uploader.TYPE);
+				   if (Y.Uploader.TYPE != "none" && !Y.UA.ios) {
+					   var uploader = new Y.Uploader({width: "250px",
+													  height: "35px",
+													  multipleFiles: true,
+													  fileFieldName: "primaryFile",
+													  swfURL: "flashuploader.swf?t=" + Math.random(),
+													  uploadURL: "/cs/idcplg",
+													  simLimit: 2,
+													  withCredentials: true
+													 });
+					   var uploadDone = false;
+				
+					   if (Y.Uploader.TYPE == "html5") {
+						  uploader.set("dragAndDropArea", "body");
+				
+						  Y.one("#ddmessage").setHTML("<strong>Drag and drop files here.</strong>");
+				
+						  uploader.on(["dragenter", "dragover"], function (event) {
+							  var ddmessage = Y.one("#ddmessage");
+							  if (ddmessage) {
+								ddmessage.setHTML("<strong>Files detected, drop them here!</strong>");
+								ddmessage.addClass("yellowBackground");
+							  }
+						   });
+				
+						   uploader.on(["dragleave", "drop"], function (event) {
+							  var ddmessage = Y.one("#ddmessage");
+							  if (ddmessage) {
+								ddmessage.setHTML("<strong>Drag and drop files here.</strong>");
+								ddmessage.removeClass("yellowBackground");
+							  }
+						   });
+					   }
+				
+					   uploader.render("#selectFilesButtonContainer");
+				
+					   uploader.after("fileselect", function (event) {
+				
+						  var fileList = event.fileList;
+						  var fileTable = Y.one("#filenames tbody");
+						  if (fileList.length > 0 && Y.one("#nofiles")) {
+							Y.one("#nofiles").remove();
+						  }
+				
+						  if (uploadDone) {
+							uploadDone = false;
+							fileTable.setHTML("");
+						  }
+				
+						  var perFileVars = {};
+				
+						  Y.each(fileList, function (fileInstance) {
+							  fileTable.append("<tr id='" + fileInstance.get("id") + "_row" + "'>" +
+													"<td class='filename'>" + fileInstance.get("name") + "</td>" +
+													"<td class='filesize'>" + fileInstance.get("size") + "</td>" +
+													"<td class='percentdone'>Hasn't started yet</td>" +
+													"<td class='serverdata'>&nbsp;</td>");
+				
+							  perFileVars[fileInstance.get("id")] = {filename: fileInstance.get("name"), IdcService: "CHECKIN_NEW", dDocType: "Document", dDocTitle: dDocTitle.value, dSecurityGroup: "Public", xCustomMetadata: xCustomMetadata.value, IsJson: "1"};
+						  });
+				
+							  uploader.set("postVarsPerFile", Y.merge(uploader.get("postVarsPerFile"), perFileVars));
+					   });
+				
+					   uploader.on("uploadprogress", function (event) {
+							var fileRow = Y.one("#" + event.file.get("id") + "_row");
+								fileRow.one(".percentdone").set("text", event.percentLoaded + "%");
+					   });
+				
+					   uploader.on("uploadstart", function (event) {
+							uploader.set("enabled", false);
+							Y.one("#uploadFilesButton").addClass("yui3-button-disabled");
+							Y.one("#uploadFilesButton").detach("click");
+					   });
+				
+					   uploader.on("uploadcomplete", function (event) {
+							var fileRow = Y.one("#" + event.file.get("id") + "_row");
+								fileRow.one(".percentdone").set("text", "Finished!");
+								jsondata = Y.JSON.parse(event.data);
+								fileRow.one(".serverdata").setHTML("dDocName: <b>" + jsondata.LocalData.dDocName + "</b>");
+					   });
+				
+					   uploader.on("totaluploadprogress", function (event) {
+								Y.one("#overallProgress").setHTML("Total uploaded: <strong>" + event.percentLoaded + "%" + "</strong>");
+					   });
+				
+					   uploader.on("alluploadscomplete", function (event) {
+									 uploader.set("enabled", true);
+									 uploader.set("fileList", []);
+									 Y.one("#uploadFilesButton").removeClass("yui3-button-disabled");
+									 Y.one("#uploadFilesButton").on("click", function () {
+										  if (!uploadDone && uploader.get("fileList").length > 0) {
+											 uploader.uploadAll();
+										  }
+									 });
+									 Y.one("#overallProgress").set("text", "Uploads complete!");
+									 uploadDone = true;
+					   });
+				
+					   Y.one("#uploadFilesButton").on("click", function () {
+						 if (!uploadDone && uploader.get("fileList").length > 0) {
+							uploader.uploadAll();
+						 }
+					   });
+				   }
+				   else {
+					   Y.one("#uploaderContainer").set("text", "We are sorry, but to use the uploader, you either need a browser that support HTML5 or have the Flash player installed on your computer.");
+				   }
+				
+				
+				});
+			</script>
+		</div>
+	</body>
+</html>
