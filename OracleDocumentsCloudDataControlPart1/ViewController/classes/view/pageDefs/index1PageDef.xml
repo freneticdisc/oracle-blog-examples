@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="index1PageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variable Type="java.lang.String" Name="listItemsInFolder_folderid" IsQueriable="false"/>
+    </variableIterator>
+    <methodIterator Binds="listItemsInFolder.result" DataControl="ItemsDC" RangeSize="25" BeanClass="model.Item"
+                    id="listItemsInFolderIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="listItemsInFolder" RequiresUpdateModel="true" Action="invokeMethod" MethodName="listItemsInFolder"
+                  IsViewObjectMethod="false" DataControl="ItemsDC" InstanceName="data.ItemsDC.dataProvider"
+                  ReturnName="data.ItemsDC.methodResults.listItemsInFolder_ItemsDC_dataProvider_listItemsInFolder_result">
+      <NamedData NDName="folderid" NDType="java.lang.String" NDValue="${bindings.listItemsInFolder_folderid}"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="folderid">
+      <AttrNames>
+        <Item Value="listItemsInFolder_folderid"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="listItemsInFolderIterator" id="Item">
+      <nodeDefinition DefName="model.Item" Name="Item0">
+        <AttrNames>
+          <Item Value="itemType"/>
+          <Item Value="ID"/>
+          <Item Value="parentID"/>
+          <Item Value="name"/>
+          <Item Value="ownedBy"/>
+          <Item Value="createdBy"/>
+          <Item Value="modifiedBy"/>
+          <Item Value="createdTime"/>
+          <Item Value="modifiedTime"/>
+          <Item Value="size"/>
+          <Item Value="childItemsCount"/>
+          <Item Value="file"/>
+          <Item Value="folder"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

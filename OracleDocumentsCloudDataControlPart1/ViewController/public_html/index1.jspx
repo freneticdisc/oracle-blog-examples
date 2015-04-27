@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="index1.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelGridLayout id="pgl1">
+                    <af:gridRow height="100%" id="gr1">
+                        <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                            <!-- Content -->
+                            <af:inputText value="#{bindings.folderid.inputValue}" simple="true"
+                                          required="#{bindings.folderid.hints.mandatory}"
+                                          columns="#{bindings.folderid.hints.displayWidth}"
+                                          maximumLength="#{bindings.folderid.hints.precision}"
+                                          shortDesc="#{bindings.folderid.hints.tooltip}" id="it1">
+                                <f:validator binding="#{bindings.folderid.validator}"/>
+                            </af:inputText>
+                            <af:table value="#{bindings.Item.collectionModel}" var="row"
+                                      rows="#{bindings.Item.rangeSize}"
+                                      emptyText="#{bindings.Item.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      rowBandingInterval="0" fetchSize="#{bindings.Item.rangeSize}" id="t1">
+                                <af:column headerText="#{bindings.Item.hints.itemType.label}" id="c1">
+                                    <af:outputText value="#{row.itemType}"
+                                                   shortDesc="#{bindings.Item.hints.itemType.tooltip}" id="ot1"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.Item.hints.ID.label}" id="c2">
+                                    <af:outputText value="#{row.ID}" shortDesc="#{bindings.Item.hints.ID.tooltip}"
+                                                   id="ot2"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.Item.hints.parentID.label}" id="c3">
+                                    <af:outputText value="#{row.parentID}"
+                                                   shortDesc="#{bindings.Item.hints.parentID.tooltip}" id="ot3"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.Item.hints.name.label}" id="c4">
+                                    <!--<af:outputText value="#{row.name}" shortDesc="#{bindings.Item.hints.name.tooltip}"
+                                                   id="ot4"/>-->
+                                    <af:link actionListener="#{bindings.listItemsInFolder.execute}"
+                                             text="#{row.name}" disabled="#{row.file}"
+                                             id="l1">
+                                        <af:setPropertyListener from="#{row.ID}" to="#{bindings.folderid.inputValue}" type="action"/>
+                                    </af:link>
+                                </af:column>
+                                <af:column headerText="#{bindings.Item.hints.ownedBy.label}" id="c5">
+                                    <af:outputText value="#{row.ownedBy}"
+                                                   shortDesc="#{bindings.Item.hints.ownedBy.tooltip}" id="ot5"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.Item.hints.createdBy.label}" id="c6">
+                                    <af:outputText value="#{row.createdBy}"
+                                                   shortDesc="#{bindings.Item.hints.createdBy.tooltip}" id="ot6"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.Item.hints.modifiedBy.label}" id="c7">
+                                    <af:outputText value="#{row.modifiedBy}"
+                                                   shortDesc="#{bindings.Item.hints.modifiedBy.tooltip}" id="ot7"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.Item.hints.createdTime.label}" id="c8">
+                                    <af:outputText value="#{row.createdTime}"
+                                                   shortDesc="#{bindings.Item.hints.createdTime.tooltip}" id="ot8"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.Item.hints.modifiedTime.label}" id="c9">
+                                    <af:outputText value="#{row.modifiedTime}"
+                                                   shortDesc="#{bindings.Item.hints.modifiedTime.tooltip}" id="ot9"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.Item.hints.size.label}" id="c10">
+                                    <af:outputText value="#{row.size}" shortDesc="#{bindings.Item.hints.size.tooltip}"
+                                                   id="ot10">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.Item.hints.size.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="#{bindings.Item.hints.childItemsCount.label}" id="c11">
+                                    <af:outputText value="#{row.childItemsCount}"
+                                                   shortDesc="#{bindings.Item.hints.childItemsCount.tooltip}" id="ot11">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.Item.hints.childItemsCount.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                            </af:table>
+                        </af:gridCell>
+                    </af:gridRow>
+                </af:panelGridLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

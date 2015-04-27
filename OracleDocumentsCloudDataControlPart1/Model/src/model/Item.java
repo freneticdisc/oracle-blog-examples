@@ -11,15 +11,19 @@ package model;
 public class Item {
     private Type ItemType;
     private String ID;
+    private String ParentID;
     private String Name;
     private String OwnedBy;
     private String CreatedBy;
     private String ModifiedBy;
     private String CreatedTime;
     private String ModifiedTime;
-    private long Size;
-    private long ChildItemsCount;
+    private Double Size;
+    private Double ChildItemsCount;
 
+    public Item() {
+        super();
+    }
 
     public Item(Type ItemType,
                 String ID,
@@ -29,8 +33,8 @@ public class Item {
                 String ModifiedBy,
                 String CreatedTime,
                 String ModifiedTime,
-                long Size,
-                long ChildItemsCount) {
+                Double Size,
+                Double ChildItemsCount) {
         super();
         this.ItemType = ItemType;
         this.ID = ID;
@@ -58,6 +62,14 @@ public class Item {
 
     public String getID() {
         return ID;
+    }
+    
+    public void setParentID(String ParentID) {
+        this.ParentID = ParentID;
+    }
+
+    public String getParentID() {
+        return ParentID;
     }
 
     public void setName(String Name) {
@@ -108,19 +120,27 @@ public class Item {
         return ModifiedTime;
     }
 
-    public void setSize(long Size) {
+    public void setSize(Double Size) {
         this.Size = Size;
     }
 
-    public long getSize() {
+    public Double getSize() {
         return Size;
     }
 
-    public void setChildItemsCount(long ChildItemsCount) {
+    public void setChildItemsCount(Double ChildItemsCount) {
         this.ChildItemsCount = ChildItemsCount;
     }
 
-    public long getChildItemsCount() {
+    public Double getChildItemsCount() {
         return ChildItemsCount;
+    }
+    
+    public boolean isFile() {
+        return (this.ItemType == Type.FILE) ? true : false;
+    }
+    
+    public boolean isFolder() {
+        return (this.ItemType == Type.FOLDER) ? true : false;
     }
 }
