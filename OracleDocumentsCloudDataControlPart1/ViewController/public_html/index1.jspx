@@ -14,7 +14,7 @@
                                           required="#{bindings.folderid.hints.mandatory}"
                                           columns="#{bindings.folderid.hints.displayWidth}"
                                           maximumLength="#{bindings.folderid.hints.precision}"
-                                          shortDesc="#{bindings.folderid.hints.tooltip}" id="it1">
+                                          shortDesc="#{bindings.folderid.hints.tooltip}" id="it1" visible="false">
                                 <f:validator binding="#{bindings.folderid.validator}"/>
                             </af:inputText>
                             <af:table value="#{bindings.Item.collectionModel}" var="row"
