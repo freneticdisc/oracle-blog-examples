@@ -19,9 +19,18 @@ INDEXTYPE
 			i_lang_context  INTEGER := dbms_lob.default_lang_ctx;
 			i_warning     	INTEGER;
 			v_categories	VARCHAR2(200) := '';
-			v_query			VARCHAR2(100) := '';
+			v_query			VARCHAR2(100) := 'SELECT ';
     BEGIN
-    		v_query := v_query || 'SELECT ddocfulltext';
+    		    IF (INSTR(activeindex, 'IDCCOLL') = 1)
+    		  THEN
+    			   v_query := v_query || 'ddocfulltext';
+    		 ELSIF (INSTR(activeindex, 'IDCTEXT') = 1)
+    		  THEN
+    		 	   v_query := v_query || 'otscontent';
+    		  ELSE
+    		  	   v_query := v_query || '''X''';
+    		END IF;
+
     		v_query := v_query || '  FROM ' || activeindex;
     		v_query := v_query || ' WHERE ddocname = :1';
     	 	dbms_lob.createtemporary(c_document, true);
