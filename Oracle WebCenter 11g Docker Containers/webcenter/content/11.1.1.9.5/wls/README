@@ -1,0 +1,12 @@
+Login to My Oracle Support and download the file.
+
+URL: https://support.oracle.com
+Downloaded Files: p20780171_1036_Generic.zip
+
+Required Files: p20780171_1036_Generic.zip
+
+You may choose to delete the remaining unnecessary files to conserve space.
+
+Also make sure that the file has appropriate file permissions
+
+chmod -R 755 *

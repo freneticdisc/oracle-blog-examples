@@ -1,0 +1,17 @@
+Login to Oracle Technology Network and download the file.
+
+Page: http://www.oracle.com/technetwork/middleware/webcenter/content/downloads/wcc-11g-downloads-2734036.html
+
+Downloaded Files: ofm_wcc_generic_11.1.1.9.0_disk1_1of2.zip
+                  ofm_wcc_generic_11.1.1.9.0_disk1_2of2.zip
+
+Unzip the file in this directory.
+
+Required Directories: Disk1
+                      Disk2
+
+You may choose to delete the remaining unnecessary files to conserve space.
+
+Also make sure that the file has appropriate file permissions
+
+chmod -R 755 *
