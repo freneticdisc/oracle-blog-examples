@@ -5,11 +5,13 @@ ENV _SCRATCH /tmp/scratch
 ENV ORA_HOME /u01/app/oracle
 ENV JDK_HOME ${ORA_HOME}/product/jdk
 ENV FMW_HOME ${ORA_HOME}/product/fmw
+ENV ADM_HOME ${ORA_HOME}/admin
 
 COPY jdk ${_SCRATCH}/jdk/
 COPY wls ${_SCRATCH}/wls/
 COPY rcu ${_SCRATCH}/rcu/
 COPY wcp ${_SCRATCH}/wcp/
+COPY domain ${_SCRATCH}/domain/
 
 RUN yum update -y -q && \
 	yum install -y -q binutils compat-libcap1 compat-libstdc++-33 \
@@ -34,6 +36,8 @@ RUN mkdir -p ${JDK_HOME} && \
 	echo "inventory_loc=${FMW_HOME}/oraInventory" > ${_SCRATCH}/oraInst.loc && \
 	echo "inst_group=oinstall" >> ${_SCRATCH}/oraInst.loc && \
 	${_SCRATCH}/wcp/Disk1/runInstaller -silent -invPtrLoc ${_SCRATCH}/oraInst.loc -responseFile ${_SCRATCH}/wcp/Disk1/stage/Response/sampleResponse_wls.rsp -jreLoc ${JDK_HOME} -waitforcompletion -force -novalidation MIDDLEWARE_HOME=${FMW_HOME} ORACLE_HOME=${FMW_HOME}/Oracle_WC1 && \
+	mkdir -p ${ADM_HOME}/templates && \
+	cp ${_SCRATCH}/domain/*.jar ${ADM_HOME}/templates && \
 	rm -rf ${_SCRATCH}
 
 CMD /bin/bash

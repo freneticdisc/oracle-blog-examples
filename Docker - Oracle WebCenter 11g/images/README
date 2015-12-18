@@ -33,6 +33,7 @@ To build an image for use, follow the instructions below:
 	~/webcenter/wcp/ofm_wc_generic_11.1.1.9.0_disk1_1of2.zip
 	~/webcenter/wcp/ofm_wc_generic_11.1.1.9.0_disk1_2of2.zip
 	~/webcenter/wcp/p21950042_111190_Generic.zip
+	~/webcenter/domain/docker_domain_full_12172015_185504.jar
 
 4. Extract the following archives and them remove the unnecessary files if you
    wish.The instruction on where to download these files are in READMEs in those

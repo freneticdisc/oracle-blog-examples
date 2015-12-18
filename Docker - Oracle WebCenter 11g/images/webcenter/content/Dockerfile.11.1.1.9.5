@@ -5,11 +5,13 @@ ENV _SCRATCH /tmp/scratch
 ENV ORA_HOME /u01/app/oracle
 ENV JDK_HOME ${ORA_HOME}/product/jdk
 ENV FMW_HOME ${ORA_HOME}/product/fmw
+ENV ADM_HOME ${ORA_HOME}/admin
 
 COPY jdk ${_SCRATCH}/jdk/
 COPY wls ${_SCRATCH}/wls/
 COPY rcu ${_SCRATCH}/rcu/
 COPY wcc ${_SCRATCH}/wcc/
+COPY domain ${_SCRATCH}/domain/
 
 RUN yum update -y -q && \
 	yum install -y -q binutils compat-libcap1 compat-libstdc++-33 \
@@ -42,6 +44,8 @@ RUN mkdir -p ${JDK_HOME} && \
 	cd && \
 	${FMW_HOME}/Oracle_ECM1/OPatch/opatch apply -silent ${_SCRATCH}/wcc/22060967 && \
 	${FMW_HOME}/Oracle_ECM1/OPatch/opatch apply -silent ${_SCRATCH}/wcc/ECM_22249978 && \
+	mkdir -p ${ADM_HOME}/templates && \
+	cp ${_SCRATCH}/domain/*.jar ${ADM_HOME}/templates && \
 	rm -rf ${_SCRATCH}
 
 CMD /bin/bash
