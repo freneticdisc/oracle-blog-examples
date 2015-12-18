@@ -2,3 +2,4 @@
 *.lck
 .project
 .metadata
+.pydevproject
