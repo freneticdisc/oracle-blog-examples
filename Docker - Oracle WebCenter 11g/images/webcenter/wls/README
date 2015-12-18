@@ -1,0 +1,18 @@
+Login to Oracle Technology Network and MOS and download the file.
+
+Page: http://www.oracle.com/technetwork/middleware/weblogic/downloads/wls-main-097127.html
+http://download.oracle.com/otn/nt/middleware/11g/wls/1036/wls1036_generic.jar
+https://support.oracle.com
+
+Downloaded Files: wls1036_generic.jar
+				  p20780171_1036_Generic.zip
+
+Required Files: wls1036_generic.jar
+				p20780171_1036_Generic.zip
+				silent.xml
+
+The silent.xml file is part of this project.
+
+Also make sure that the file has appropriate file permissions
+
+chmod -R 755 *
