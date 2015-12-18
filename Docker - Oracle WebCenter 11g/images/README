@@ -51,7 +51,7 @@ To build an image for use, follow the instructions below:
 	unzip ~/webcenter/wcp/p21950042_111190_Generic.zip ~/webcenter/wcp/
 
 5. Make sure that the extracted files have the appropriate permissions.
-	chmod -R 755 ~/webcenter
+	chmod -R go+r ~/webcenter
 
 6. Place the Dockerfile for the image you want to build in the base directory.
 	~/webcenter/Dockerfile.11.1.1.9.0

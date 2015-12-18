@@ -2,4 +2,4 @@ All scripts are located in this directory and are necessary.
 
 Also make sure that the file has appropriate file permissions.
 
-chmod -R 755 *
+chmod -R go+r *

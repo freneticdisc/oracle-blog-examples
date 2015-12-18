@@ -5,4 +5,4 @@ config.sh to create a new domain based on it.
 
 Also make sure that the file has appropriate file permissions
 
-chmod -R 755 *
+chmod -R go+r *

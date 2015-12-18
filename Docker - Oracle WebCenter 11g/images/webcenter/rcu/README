@@ -13,4 +13,4 @@ You may choose to delete the remaining unnecessary files to conserve space.
 
 Also make sure that the file has appropriate file permissions
 
-chmod -R 755 *
+chmod -R go+r *
