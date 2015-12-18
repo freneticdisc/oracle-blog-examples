@@ -1,0 +1,7 @@
+Required Files: docker_domain_full_12172015_185504.jar
+
+The docker_domain_full_12172015_185504.jar file is part of this project.
+
+Also make sure that the file has appropriate file permissions
+
+chmod -R 755 *
