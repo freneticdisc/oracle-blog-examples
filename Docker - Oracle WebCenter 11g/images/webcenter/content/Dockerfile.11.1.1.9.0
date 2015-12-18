@@ -36,8 +36,9 @@ RUN mkdir -p ${JDK_HOME} && \
 	echo "inventory_loc=${FMW_HOME}/oraInventory" > ${_SCRATCH}/oraInst.loc && \
 	echo "inst_group=oinstall" >> ${_SCRATCH}/oraInst.loc && \
 	${_SCRATCH}/wcc/Disk1/runInstaller -silent -invPtrLoc ${_SCRATCH}/oraInst.loc -responseFile ${_SCRATCH}/wcc/Disk1/stage/Response/sampleResponse_wls.rsp -jreLoc ${JDK_HOME} -waitforcompletion -force -novalidation MIDDLEWARE_HOME=${FMW_HOME} ORACLE_HOME=${FMW_HOME}/Oracle_ECM1 && \
-	mkdir -p ${ADM_HOME}/templates && \
-	cp ${_SCRATCH}/domain/*.jar ${ADM_HOME}/templates && \
+	mkdir -p ${ADM_HOME}/tools/templates && \
+	mkdir -p ${ADM_HOME}/tools/scripts && \
+	cp ${_SCRATCH}/domain/*.jar ${ADM_HOME}/tools/templates && \
 	rm -rf ${_SCRATCH}
 
 CMD /bin/bash

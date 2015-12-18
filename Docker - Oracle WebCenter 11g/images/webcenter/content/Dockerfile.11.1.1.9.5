@@ -44,8 +44,9 @@ RUN mkdir -p ${JDK_HOME} && \
 	cd && \
 	${FMW_HOME}/Oracle_ECM1/OPatch/opatch apply -silent ${_SCRATCH}/wcc/22060967 && \
 	${FMW_HOME}/Oracle_ECM1/OPatch/opatch apply -silent ${_SCRATCH}/wcc/ECM_22249978 && \
-	mkdir -p ${ADM_HOME}/templates && \
-	cp ${_SCRATCH}/domain/*.jar ${ADM_HOME}/templates && \
+	mkdir -p ${ADM_HOME}/tools/templates && \
+	mkdir -p ${ADM_HOME}/tools/scripts && \
+	cp ${_SCRATCH}/domain/*.jar ${ADM_HOME}/tools/templates && \
 	rm -rf ${_SCRATCH}
 
 CMD /bin/bash
