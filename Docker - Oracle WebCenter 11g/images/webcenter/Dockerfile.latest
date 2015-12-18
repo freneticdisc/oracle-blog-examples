@@ -29,7 +29,6 @@ RUN yum update -y -q && \
 
 USER oracle
 
-# Install Java
 RUN mkdir -p ${JDK_HOME} && \
 	tar xzf ${_SCRATCH}/jdk/jdk-7u91-linux-x64.tar.gz -C ${JDK_HOME} --strip-components=1 && \
 	mkdir -p ${FMW_HOME} && \
@@ -39,7 +38,12 @@ RUN mkdir -p ${JDK_HOME} && \
 	echo "inst_group=oinstall" >> ${_SCRATCH}/oraInst.loc && \
 	${_SCRATCH}/wcp/Disk1/runInstaller -silent -invPtrLoc ${_SCRATCH}/oraInst.loc -responseFile ${_SCRATCH}/wcp/Disk1/stage/Response/sampleResponse_wls.rsp -jreLoc ${JDK_HOME} -waitforcompletion -force -novalidation MIDDLEWARE_HOME=${FMW_HOME} ORACLE_HOME=${FMW_HOME}/Oracle_WC1 && \
 	${_SCRATCH}/wcc/Disk1/runInstaller -silent -invPtrLoc ${_SCRATCH}/oraInst.loc -responseFile ${_SCRATCH}/wcc/Disk1/stage/Response/sampleResponse_wls.rsp -jreLoc ${JDK_HOME} -waitforcompletion -force -novalidation MIDDLEWARE_HOME=${FMW_HOME} ORACLE_HOME=${FMW_HOME}/Oracle_ECM1 && \
-	mkdir -p ${FMW_HOME}/utils/bsu/cache_dir && \
+	mkdir -p ${ADM_HOME}/tools/templates && \
+	mkdir -p ${ADM_HOME}/tools/scripts && \
+	cp ${_SCRATCH}/domain/*.jar ${ADM_HOME}/tools/templates && \
+	cp -r ${_SCRATCH}/scripts/* ${ADM_HOME}/tools/scripts
+
+RUN mkdir -p ${FMW_HOME}/utils/bsu/cache_dir && \
 	unzip ${_SCRATCH}/wls/p20780171_1036_Generic.zip -d ${FMW_HOME}/utils/bsu/cache_dir && \
 	cd ${FMW_HOME}/utils/bsu && \
 	sed -i 's/-Xmx512m/-Xmx1024m/g' ${FMW_HOME}/utils/bsu/bsu.sh && \
@@ -48,11 +52,8 @@ RUN mkdir -p ${JDK_HOME} && \
 	${FMW_HOME}/oracle_common/OPatch/opatch apply -silent ${_SCRATCH}/wcp/21950042 && \
 	${FMW_HOME}/Oracle_WC1/OPatch/opatch apply -silent ${_SCRATCH}/wcp/21950042 && \
 	${FMW_HOME}/Oracle_ECM1/OPatch/opatch apply -silent ${_SCRATCH}/wcc/22060967 && \
-	${FMW_HOME}/Oracle_ECM1/OPatch/opatch apply -silent ${_SCRATCH}/wcc/ECM_22249978 && \
-	mkdir -p ${ADM_HOME}/tools/templates && \
-	mkdir -p ${ADM_HOME}/tools/scripts && \
-	cp ${_SCRATCH}/domain/*.jar ${ADM_HOME}/tools/templates && \
-	cp -r ${_SCRATCH}/scripts/* ${ADM_HOME}/tools/scripts && \
-	rm -rf ${_SCRATCH}
+	${FMW_HOME}/Oracle_ECM1/OPatch/opatch apply -silent ${_SCRATCH}/wcc/ECM_22249978
+
+RUN rm -rf ${_SCRATCH}
 
 CMD /bin/bash

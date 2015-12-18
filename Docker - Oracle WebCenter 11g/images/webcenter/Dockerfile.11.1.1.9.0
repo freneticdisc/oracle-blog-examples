@@ -29,7 +29,6 @@ RUN yum update -y -q && \
 
 USER oracle
 
-# Install Java
 RUN mkdir -p ${JDK_HOME} && \
 	tar xzf ${_SCRATCH}/jdk/jdk-7u91-linux-x64.tar.gz -C ${JDK_HOME} --strip-components=1 && \
 	mkdir -p ${FMW_HOME} && \
@@ -42,7 +41,8 @@ RUN mkdir -p ${JDK_HOME} && \
 	mkdir -p ${ADM_HOME}/tools/templates && \
 	mkdir -p ${ADM_HOME}/tools/scripts && \
 	cp ${_SCRATCH}/domain/*.jar ${ADM_HOME}/tools/templates && \
-	cp -r ${_SCRATCH}/scripts/* ${ADM_HOME}/tools/scripts && \
-	rm -rf ${_SCRATCH}
+	cp -r ${_SCRATCH}/scripts/* ${ADM_HOME}/tools/scripts
+
+RUN rm -rf ${_SCRATCH}
 
 CMD /bin/bash
