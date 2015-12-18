@@ -1,6 +1,7 @@
-Required Files: docker_domain_full_12172015_185504.jar
+Required Files: *.jar
 
-The docker_domain_full_12172015_185504.jar file is part of this project.
+These are the domain templates that can be either unpacked or user within
+config.sh to create a new domain based on it.
 
 Also make sure that the file has appropriate file permissions
 
