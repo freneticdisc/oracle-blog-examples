@@ -21,7 +21,7 @@ RUN yum update -y -q && \
 	libstdc++-devel libXext libXtst libXi openmotif openmotif22 redhat-lsb \
 	sysstat zlib zlib.i686 libX11 libX11.i686 unzip xorg-x11-utils xorg-x11-xauth && \
 	groupadd -g 1000 oinstall && \
-	useradd -u 1001 -g 1000 -m oracle && \
+	useradd -u 1000 -g 1000 -m oracle && \
 	mkdir -p ${ORA_HOME} && \
 	chown -R oracle:oinstall ${_SCRATCH} && \
 	chown -R oracle:oinstall ${ORA_HOME}
