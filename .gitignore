@@ -1,3 +1,4 @@
 *.jdb
 *.lck
 .project
+.metadata
