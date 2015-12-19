@@ -98,7 +98,8 @@ To build an image for use, follow the instructions below:
         WebLogic 10.3.6.0.12
         WebCenter Portal 11.1.1.9.8
 
-7. Run the appropriate command to build your image.
+7. Run the appropriate command to build your image. Use --no-cache=true if you
+   do not want to cache intermediate images.
     cd ~/webcenter
     docker build -t webcenter:11.1.1.9.0 -f ~/webcenter/Dockerfile.11.1.1.9.0 .
     docker build -t webcenter:latest -f ~/webcenter/Dockerfile.latest .
