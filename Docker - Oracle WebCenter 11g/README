@@ -33,6 +33,12 @@ To build an image for use, follow the instructions below:
 	~/webcenter/wcp/ofm_wc_generic_11.1.1.9.0_disk1_1of2.zip
 	~/webcenter/wcp/ofm_wc_generic_11.1.1.9.0_disk1_2of2.zip
 	~/webcenter/wcp/p21950042_111190_Generic.zip
+	~/webcenter/Dockerfile.11.1.1.9.0
+	~/webcenter/Dockerfile.latest
+	~/webcenter/content/Dockerfile.11.1.1.9.0
+	~/webcenter/content/Dockerfile.11.1.1.9.5
+	~/webcenter/portal/Dockerfile.11.1.1.9.0
+	~/webcenter/portal/Dockerfile.11.1.1.9.8
 	~/webcenter/domain/*
 	~/webcenter/scripts/*
 
