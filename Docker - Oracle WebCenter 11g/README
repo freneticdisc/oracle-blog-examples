@@ -120,8 +120,10 @@ To build an image for use, follow the instructions below:
     
 10. After the container has started and the Admin Server is up, login to the
     Admin Console and update all the data sources that you intend to use with
-    the correct value of the JDBC URL, username and password. No restart of the
-    Admin Server will be required and no data sources are targeted to it.
+    the correct values for the JDBC URL, username and password. No restart of
+    the Admin Server will be required as no data sources are targeted to it.
+    RCU is packaged within the docker image so you can start an interactive
+    container and run the RCU in command line mode.
 
 11. To start a container running a managed server, run the following command:
     docker run -d -P --name=mserver_${SERVICE} \
