@@ -133,4 +133,4 @@ To build an image for use, follow the instructions below:
               running on it
     SERVICE_ID - can be any one of the following: capture, ibr, ipm, irm, ssxa,
                  ucm, urm, collaboration, portlet, spaces, utilities
-    ADMIN_SERVER_URL - ts://${IP_ADDRESS_OF_ADMIN_CONTAINER}:7001
+    ADMIN_SERVER_URL - t3://${IP_ADDRESS_OF_ADMIN_CONTAINER}:7001
