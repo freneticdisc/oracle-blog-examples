@@ -117,7 +117,8 @@ To build an image for use, follow the instructions below:
 9. To start a container running the admin server, run the following command:
     docker run -d -P --name=adminserver \
     -v /Volumes/aserver:/u01/app/oracle/admin/aserver:rw \
-    -t webcenter:latest ${ADM_HOME}/tools/scripts/start_server.sh adminserver
+    -t webcenter:latest /bin/sh /u01/app/oracle/admin/tools/scripts/start_server.sh \
+    adminserver
     
 10. After the container has started and the Admin Server is up, login to the
     Admin Console and update all the data sources that you intend to use with
@@ -128,8 +129,8 @@ To build an image for use, follow the instructions below:
 
 11. To start a container running a managed server, run the following command:
     docker run -d -P --name=mserver_${SERVICE} \
-    -v /Volumes/aserver:/u01/app/oracle/admin/aserver:r \
-    -t webcenter:latest ${ADM_HOME}/tools/scripts/start_server.sh \
+    -v /Volumes/aserver:/u01/app/oracle/admin/aserver:ro \
+    -t webcenter:latest /bin/sh /u01/app/oracle/admin/tools/scripts/start_server.sh \
     ${SERVICE_ID} ${ADMIN_SERVER_URL}
     
     SERVICE - Any name to identify the container with the service you are
