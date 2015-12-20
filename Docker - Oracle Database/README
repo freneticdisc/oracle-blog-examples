@@ -1,0 +1,56 @@
+Docker Images for Oracle Database
+Version: 1.0.0
+Updated: 12/20/2015
+--------------------------------------------------------------------
+
+This project contains the Dockerfiles and the corresponding directory structures
+needed to build Docker containers for Oracle Database.
+
+Docker containers at the time of the writing of this article have a hardcoded
+limitation of 64M for shared memory (/dev/shm) on every container. There is a
+fix in the experimental release of Docker which should become part of Docker
+version 1.10.0 and above. You can read about it here:
+https://github.com/docker/docker/issues/16164
+
+Oracle Databases require at least 1GB of shared memory and as such the
+[/etc/init.d/oracle-xe configure] command will fail. Therefore, I have used the
+Docker 1.10.0-dev Experimental for this build.
+
+To build an image for use, follow the instructions below:
+
+1. Install the Experimental Docker build.
+   curl -sSL https://experimental.docker.com/ | sh
+
+2. Update the kernel parameters on the host machine to meet the Oracle
+   specifications. The specifications can be found on the webpage here:
+   http://docs.oracle.com/cd/E17781_01/install.112/e18802/toc.htm#BABJFAIA
+
+3. Create a base directory for your Docker context.
+    mkdir ~/database
+    
+4. Create the following directories under the Docker context directory. You may
+   not need all of these directories depending on the image you are trying to
+   build.
+    cd ~/database
+    mkdir xe
+    
+5. Download the required software packages into the directories we created in
+   the previous step. At the time of the creation of this README, the following
+   installers and patched were available. The instruction on where to download
+   these files are in READMEs in those directories.
+    ~/oracle/db/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+
+6. Make sure that the files have the appropriate permissions.
+    chmod -R go+r ~/database
+
+7. Place the Dockerfile for the image you want to build in the base directory.
+    ~/database/xe/Dockerfile.11.2.0.1.0
+
+8. Run the appropriate command to build your image. Use --no-cache=true if you
+   do not want to cache intermediate images.
+    cd ~/database
+    docker build -t oracle/db/xe:11.2.0.1.0 --shm-size=2g \
+    -f ~/database/xe/Dockerfile.11.2.0.1.0 .
+
+9. To start a container running the database, run the following command:
+    docker run -i -P --shm-size=2g --name=xe-db1 -t oracle/db/xe:11.2.0.1.0

@@ -1,0 +1,8 @@
+Download the database installer here
+http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html
+
+Downloaded file: oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+
+Also make sure that the file has appropriate file permissions
+
+chmod -R go+r *
