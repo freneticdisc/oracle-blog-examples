@@ -5,12 +5,6 @@ Page: http://www.oracle.com/technetwork/middleware/webcenter/content/downloads/w
 
 Downloaded Files: ofm_rcu_linux_11.1.1.9.0_64_disk1_1of1.zip
 
-Unzip the file in this directory.
-
-Required Directories: rcuHome
-
-You may choose to delete the remaining unnecessary files to conserve space.
-
 Also make sure that the file has appropriate file permissions
 
 chmod -R go+r *

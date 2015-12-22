@@ -30,36 +30,22 @@ To build an image for use, follow the instructions below:
     ~/webcenter/wcc/ofm_wcc_generic_11.1.1.9.0_disk1_2of2.zip
     ~/webcenter/wcc/p22060967_111190_Generic.zip
     ~/webcenter/wcc/p22249978_111190_Generic.zip
+    ~/webcenter/wcc/Dockerfile.11.1.1.9.0
+    ~/webcenter/wcc/Dockerfile.11.1.1.9.5
     ~/webcenter/wcp/ofm_wc_generic_11.1.1.9.0_disk1_1of2.zip
     ~/webcenter/wcp/ofm_wc_generic_11.1.1.9.0_disk1_2of2.zip
     ~/webcenter/wcp/p21950042_111190_Generic.zip
+    ~/webcenter/wcp/Dockerfile.11.1.1.9.0
+    ~/webcenter/wcp/Dockerfile.11.1.1.9.8
     ~/webcenter/Dockerfile.11.1.1.9.0
     ~/webcenter/Dockerfile.latest
-    ~/webcenter/content/Dockerfile.11.1.1.9.0
-    ~/webcenter/content/Dockerfile.11.1.1.9.5
-    ~/webcenter/portal/Dockerfile.11.1.1.9.0
-    ~/webcenter/portal/Dockerfile.11.1.1.9.8
     ~/webcenter/domain/*
     ~/webcenter/scripts/*
 
-4. Extract the following archives and them remove the unnecessary files if you
-   wish.The instruction on where to download these files are in READMEs in those
-   directories.
-    unzip ~/webcenter/jdk/p21984104_17091_Linux-x86-64.zip -d ~/webcenter/jdk/
-    unzip ~/webcenter/wls/p20780171_1036_Generic.zip -d ~/webcenter/wls/
-    unzip ~/webcenter/rcu/ofm_rcu_linux_11.1.1.9.0_64_disk1_1of1.zip ~/webcenter/rcu/
-    unzip ~/webcenter/wcc/ofm_wcc_generic_11.1.1.9.0_disk1_1of2.zip ~/webcenter/wcc/
-    unzip ~/webcenter/wcc/ofm_wcc_generic_11.1.1.9.0_disk1_2of2.zip ~/webcenter/wcc/
-    unzip ~/webcenter/wcc/p22060967_111190_Generic.zip ~/webcenter/wcc/
-    unzip ~/webcenter/wcc/p22249978_111190_Generic.zip ~/webcenter/wcc/
-    unzip ~/webcenter/wcp/ofm_wc_generic_11.1.1.9.0_disk1_1of2.zip ~/webcenter/wcp/
-    unzip ~/webcenter/wcp/ofm_wc_generic_11.1.1.9.0_disk1_2of2.zip ~/webcenter/wcp/
-    unzip ~/webcenter/wcp/p21950042_111190_Generic.zip ~/webcenter/wcp/
-
-5. Make sure that the extracted files have the appropriate permissions.
+4. Make sure that all the files have the appropriate permissions.
     chmod -R go+r ~/webcenter
 
-6. Place the Dockerfile for the image you want to build in the base directory.
+5. Place the Dockerfile for the image you want to build in the base directory.
     ~/webcenter/Dockerfile.11.1.1.9.0
         Java JDK 1.7.0_91
         RCU 11.1.1.9.0
@@ -74,60 +60,60 @@ To build an image for use, follow the instructions below:
         WebCenter Content 11.1.1.9.5
         WebCenter Portal 11.1.1.9.8
         
-    ~/webcenter/content/Dockerfile.11.1.1.9.0
+    ~/webcenter/wcc/Dockerfile.11.1.1.9.0
         Java JDK 1.7.0_91
         RCU 11.1.1.9.0
         WebLogic 10.3.6.0.0
         WebCenter Content 11.1.1.9.0
 
-    ~/webcenter/content/Dockerfile.11.1.1.9.5
+    ~/webcenter/wcc/Dockerfile.11.1.1.9.5
         Java JDK 1.7.0_91
         RCU 11.1.1.9.0
         WebLogic 10.3.6.0.12
         WebCenter Content 11.1.1.9.5
 
-    ~/webcenter/portal/Dockerfile.11.1.1.9.0
+    ~/webcenter/wcp/Dockerfile.11.1.1.9.0
         Java JDK 1.7.0_91
         RCU 11.1.1.9.0
         WebLogic 10.3.6.0.0
         WebCenter Portal 11.1.1.9.0
 
-    ~/webcenter/portal/Dockerfile.11.1.1.9.8
+    ~/webcenter/wcp/Dockerfile.11.1.1.9.8
         Java JDK 1.7.0_91
         RCU 11.1.1.9.0
         WebLogic 10.3.6.0.12
         WebCenter Portal 11.1.1.9.8
 
-7. Run the appropriate command to build your image. Use --no-cache=true if you
+6. Run the appropriate command to build your image. Use --no-cache=true if you
    do not want to cache intermediate images.
     cd ~/webcenter
     docker build -t webcenter:11.1.1.9.0 -f ~/webcenter/Dockerfile.11.1.1.9.0 .
     docker build -t webcenter:latest -f ~/webcenter/Dockerfile.latest .
-    docker build -t webcenter/content:11.1.1.9.0 -f ~/webcenter/content/Dockerfile.11.1.1.9.0 .
-    docker build -t webcenter/content:11.1.1.9.5 -f ~/webcenter/content/Dockerfile.11.1.1.9.5 .
-    docker build -t webcenter/portal:11.1.1.9.0 -f ~/webcenter/portal/Dockerfile.11.1.1.9.0 .
-    docker build -t webcenter/portal:11.1.1.9.8 -f ~/webcenter/portal/Dockerfile.11.1.1.9.8 .
+    docker build -t webcenter/content:11.1.1.9.0 -f ~/webcenter/wcc/Dockerfile.11.1.1.9.0 .
+    docker build -t webcenter/content:11.1.1.9.5 -f ~/webcenter/wcc/Dockerfile.11.1.1.9.5 .
+    docker build -t webcenter/portal:11.1.1.9.0 -f ~/webcenter/wcp/Dockerfile.11.1.1.9.0 .
+    docker build -t webcenter/portal:11.1.1.9.8 -f ~/webcenter/wcp/Dockerfile.11.1.1.9.8 .
 
-8. After your image(s) are built, you can start creating the containers.
+7. After your image(s) are built, you can start creating the containers.
    Note that the you will need to have a shared volume between all the
    containers. This is where the admin domain will reside. You may choose
    to mount the volume with RW permissions on the admin container and mount
    the volume with R permissions on the managed server containers.
 
-9. To start a container running the admin server, run the following command:
+8. To start a container running the admin server, run the following command:
     docker run -d -P --name=adminserver \
     -v /Volumes/aserver:/u01/app/oracle/admin/aserver:rw \
     -t webcenter:latest /bin/sh /u01/app/oracle/admin/tools/scripts/start_server.sh \
     adminserver
     
-10. After the container has started and the Admin Server is up, login to the
-    Admin Console and update all the data sources that you intend to use with
-    the correct values for the JDBC URL, username and password. No restart of
-    the Admin Server will be required as no data sources are targeted to it.
-    RCU is packaged within the docker image so you can start an interactive
-    container and run the RCU in command line mode.
+9. After the container has started and the Admin Server is up, login to the
+   Admin Console and update all the data sources that you intend to use with
+   the correct values for the JDBC URL, username and password. No restart of
+   the Admin Server will be required as no data sources are targeted to it.
+   RCU is packaged within the docker image so you can start an interactive
+   container and run the RCU in command line mode.
 
-11. To start a container running a managed server, run the following command:
+10. To start a container running a managed server, run the following command:
     docker run -d -P --name=mserver_${SERVICE} \
     -v /Volumes/aserver:/u01/app/oracle/admin/aserver:ro \
     -t webcenter:latest /bin/sh /u01/app/oracle/admin/tools/scripts/start_server.sh \

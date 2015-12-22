@@ -29,15 +29,27 @@ RUN yum update -y -q && \
 
 USER oracle
 
-RUN mkdir -p ${JDK_HOME} && \
+RUN unzip ${_SCRATCH}/jdk/p21984104_17091_Linux-x86-64.zip -d ${_SCRATCH}/jdk && \
+	mkdir -p ${JDK_HOME} && \
 	tar xzf ${_SCRATCH}/jdk/jdk-7u91-linux-x64.tar.gz -C ${JDK_HOME} --strip-components=1 && \
 	mkdir -p ${FMW_HOME} && \
-	${JDK_HOME}/bin/java -jar ${_SCRATCH}/wls/wls1036_generic.jar -mode=silent -silent_xml=${_SCRATCH}/wls/silent.xml && \
-	mv ${_SCRATCH}/rcu/rcuHome ${FMW_HOME}/ && \
+	${JDK_HOME}/bin/java -jar ${_SCRATCH}/wls/wls1036_generic.jar -mode=silent \
+	-silent_xml=${_SCRATCH}/wls/silent.xml && \
+	unzip ${_SCRATCH}/rcu/ofm_rcu_linux_11.1.1.9.0_64_disk1_1of1.zip -d ${FMW_HOME} && \
 	echo "inventory_loc=${FMW_HOME}/oraInventory" > ${_SCRATCH}/oraInst.loc && \
 	echo "inst_group=oinstall" >> ${_SCRATCH}/oraInst.loc && \
-	${_SCRATCH}/wcp/Disk1/runInstaller -silent -invPtrLoc ${_SCRATCH}/oraInst.loc -responseFile ${_SCRATCH}/wcp/Disk1/stage/Response/sampleResponse_wls.rsp -jreLoc ${JDK_HOME} -waitforcompletion -force -novalidation MIDDLEWARE_HOME=${FMW_HOME} ORACLE_HOME=${FMW_HOME}/Oracle_WC1 && \
-	${_SCRATCH}/wcc/Disk1/runInstaller -silent -invPtrLoc ${_SCRATCH}/oraInst.loc -responseFile ${_SCRATCH}/wcc/Disk1/stage/Response/sampleResponse_wls.rsp -jreLoc ${JDK_HOME} -waitforcompletion -force -novalidation MIDDLEWARE_HOME=${FMW_HOME} ORACLE_HOME=${FMW_HOME}/Oracle_ECM1 && \
+	unzip ${_SCRATCH}/wcp/ofm_wc_generic_11.1.1.9.0_disk1_1of2.zip -d ${_SCRATCH}/wcp && \
+	unzip ${_SCRATCH}/wcp/ofm_wc_generic_11.1.1.9.0_disk1_2of2.zip -d ${_SCRATCH}/wcp && \
+	unzip ${_SCRATCH}/wcc/ofm_wcc_generic_11.1.1.9.0_disk1_1of2.zip -d ${_SCRATCH}/wcc && \
+	unzip ${_SCRATCH}/wcc/ofm_wcc_generic_11.1.1.9.0_disk1_2of2.zip -d ${_SCRATCH}/wcc && \
+	${_SCRATCH}/wcp/Disk1/runInstaller -silent -invPtrLoc ${_SCRATCH}/oraInst.loc \
+	-responseFile ${_SCRATCH}/wcp/Disk1/stage/Response/sampleResponse_wls.rsp -jreLoc ${JDK_HOME} \
+	-waitforcompletion -force -novalidation MIDDLEWARE_HOME=${FMW_HOME} \
+	ORACLE_HOME=${FMW_HOME}/Oracle_WC1 && \
+	${_SCRATCH}/wcc/Disk1/runInstaller -silent -invPtrLoc ${_SCRATCH}/oraInst.loc \
+	-responseFile ${_SCRATCH}/wcc/Disk1/stage/Response/sampleResponse_wls.rsp -jreLoc ${JDK_HOME} \
+	-waitforcompletion -force -novalidation MIDDLEWARE_HOME=${FMW_HOME} \
+	ORACLE_HOME=${FMW_HOME}/Oracle_ECM1 && \
 	mkdir -p ${ADM_HOME}/tools/templates && \
 	mkdir -p ${ADM_HOME}/tools/scripts && \
 	cp ${_SCRATCH}/domain/* ${ADM_HOME}/tools/templates && \

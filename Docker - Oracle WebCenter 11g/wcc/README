@@ -8,15 +8,6 @@ Downloaded Files: ofm_wcc_generic_11.1.1.9.0_disk1_1of2.zip
                   p22060967_111190_Generic.zip
                   p22249978_111190_Generic.zip
 
-Unzip the files in this directory.
-
-Required Directories: Disk1
-                      Disk2
-                      22060967
-                      ECM_22249978
-
-You may choose to delete the remaining unnecessary files to conserve space.
-
 Also make sure that the file has appropriate file permissions
 
 chmod -R go+r *

@@ -7,10 +7,6 @@ https://support.oracle.com
 Downloaded Files: wls1036_generic.jar
                   p20780171_1036_Generic.zip
 
-Required Files: wls1036_generic.jar
-                p20780171_1036_Generic.zip
-                silent.xml
-
 The silent.xml file is part of this project.
 
 Also make sure that the file has appropriate file permissions
