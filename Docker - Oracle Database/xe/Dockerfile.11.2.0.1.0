@@ -4,7 +4,7 @@ MAINTAINER Justin Paul <justin.paul@oracle.com>
 ENV _SCRATCH /tmp/scratch
 ENV PASSWORD welcome1
 
-COPY db/oracle-xe-11.2.0-1.0.x86_64.rpm.zip ${_SCRATCH}/db/
+COPY xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip ${_SCRATCH}/db/
 
 RUN yum update -y -q && \
 	yum install -y -q binutils compat-libcap1 compat-libstdc++-33 \
