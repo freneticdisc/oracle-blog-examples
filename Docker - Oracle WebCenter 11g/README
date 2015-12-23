@@ -87,12 +87,12 @@ To build an image for use, follow the instructions below:
 6. Run the appropriate command to build your image. Use --no-cache=true if you
    do not want to cache intermediate images.
     cd ~/webcenter
-    docker build -t webcenter:11.1.1.9.0 -f ~/webcenter/Dockerfile.11.1.1.9.0 .
-    docker build -t webcenter:latest -f ~/webcenter/Dockerfile.latest .
-    docker build -t webcenter/content:11.1.1.9.0 -f ~/webcenter/wcc/Dockerfile.11.1.1.9.0 .
-    docker build -t webcenter/content:11.1.1.9.5 -f ~/webcenter/wcc/Dockerfile.11.1.1.9.5 .
-    docker build -t webcenter/portal:11.1.1.9.0 -f ~/webcenter/wcp/Dockerfile.11.1.1.9.0 .
-    docker build -t webcenter/portal:11.1.1.9.8 -f ~/webcenter/wcp/Dockerfile.11.1.1.9.8 .
+    docker build -t oracle/webcenter:11.1.1.9.0 -f ~/webcenter/Dockerfile.11.1.1.9.0 .
+    docker build -t oracle/webcenter:latest -f ~/webcenter/Dockerfile.latest .
+    docker build -t oracle/webcenter/content:11.1.1.9.0 -f ~/webcenter/wcc/Dockerfile.11.1.1.9.0 .
+    docker build -t oracle/webcenter/content:11.1.1.9.5 -f ~/webcenter/wcc/Dockerfile.11.1.1.9.5 .
+    docker build -t oracle/webcenter/portal:11.1.1.9.0 -f ~/webcenter/wcp/Dockerfile.11.1.1.9.0 .
+    docker build -t oracle/webcenter/portal:11.1.1.9.8 -f ~/webcenter/wcp/Dockerfile.11.1.1.9.8 .
 
 7. After your image(s) are built, you can start creating the containers.
    Note that the you will need to have a shared volume between all the
@@ -103,7 +103,7 @@ To build an image for use, follow the instructions below:
 8. To start a container running the admin server, run the following command:
     docker run -d -P --name=adminserver \
     -v /Volumes/aserver:/u01/app/oracle/admin/aserver:rw \
-    -t webcenter:latest /bin/sh /u01/app/oracle/admin/tools/scripts/start_server.sh \
+    -t oracle/webcenter:latest /bin/sh /u01/app/oracle/admin/tools/scripts/start_server.sh \
     adminserver
     
 9. After the container has started and the Admin Server is up, login to the
@@ -116,7 +116,7 @@ To build an image for use, follow the instructions below:
 10. To start a container running a managed server, run the following command:
     docker run -d -P --name=mserver_${SERVICE} \
     -v /Volumes/aserver:/u01/app/oracle/admin/aserver:ro \
-    -t webcenter:latest /bin/sh /u01/app/oracle/admin/tools/scripts/start_server.sh \
+    -t oracle/webcenter:latest /bin/sh /u01/app/oracle/admin/tools/scripts/start_server.sh \
     ${SERVICE_ID} ${ADMIN_SERVER_URL}
     
     SERVICE - Any name to identify the container with the service you are
