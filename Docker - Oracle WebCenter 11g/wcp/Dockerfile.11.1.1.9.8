@@ -5,7 +5,7 @@ COPY wls wcp ${_SCRATCH}/patches/
 
 USER root
 
-RUN yum update -y -q && \
+RUN yum update -y -qq && \
 	chown -R oracle:oinstall ${_SCRATCH}
 
 USER oracle

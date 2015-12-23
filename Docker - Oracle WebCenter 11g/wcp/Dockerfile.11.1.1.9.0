@@ -14,8 +14,8 @@ COPY wcp ${_SCRATCH}/wcp/
 COPY domain ${_SCRATCH}/domain/
 COPY scripts ${_SCRATCH}/scripts/
 
-RUN yum update -y -q && \
-	yum install -y -q binutils compat-libcap1 compat-libstdc++-33 \
+RUN yum update -y -qq && \
+	yum install -y -qq binutils compat-libcap1 compat-libstdc++-33 \
 	compat-libstdc++-33.i686 gcc gcc-c++ glibc glibc-devel glibc-devel.i686 \
 	libaio libaio-devel libgcc libgcc.i686 libstdc++ libstdc++.i686 \
 	libstdc++-devel libXext libXtst libXi openmotif openmotif22 redhat-lsb \
