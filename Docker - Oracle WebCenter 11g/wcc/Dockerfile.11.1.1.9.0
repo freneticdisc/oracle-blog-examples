@@ -29,7 +29,7 @@ RUN yum update -y -q && \
 
 USER oracle
 
-RUN unzip ${_SCRATCH}/jdk/p21984104_17091_Linux-x86-64.zip -d ${_SCRATCH}/jdk && \
+RUN unzip -qq ${_SCRATCH}/jdk/p21984104_17091_Linux-x86-64.zip -d ${_SCRATCH}/jdk && \
 	mkdir -p ${JDK_HOME} && \
 	tar xzf ${_SCRATCH}/jdk/jdk-7u91-linux-x64.tar.gz -C ${JDK_HOME} --strip-components=1 && \
 	rm -rf ${_SCRATCH}/jdk && \
@@ -37,12 +37,12 @@ RUN unzip ${_SCRATCH}/jdk/p21984104_17091_Linux-x86-64.zip -d ${_SCRATCH}/jdk &&
 	${JDK_HOME}/bin/java -jar ${_SCRATCH}/wls/wls1036_generic.jar -mode=silent \
 	-silent_xml=${_SCRATCH}/wls/silent.xml && \
 	rm -rf ${_SCRATCH}/wls/wls1036_generic.jar ${_SCRATCH}/wls/silent.xml && \
-	unzip ${_SCRATCH}/rcu/ofm_rcu_linux_11.1.1.9.0_64_disk1_1of1.zip -d ${FMW_HOME} && \
+	unzip -qq ${_SCRATCH}/rcu/ofm_rcu_linux_11.1.1.9.0_64_disk1_1of1.zip -d ${FMW_HOME} && \
 	rm -rf ${_SCRATCH}/rcu/ofm_rcu_linux_11.1.1.9.0_64_disk1_1of1.zip && \
 	echo "inventory_loc=${FMW_HOME}/oraInventory" > ${_SCRATCH}/oraInst.loc && \
 	echo "inst_group=oinstall" >> ${_SCRATCH}/oraInst.loc && \
-	unzip ${_SCRATCH}/wcc/ofm_wcc_generic_11.1.1.9.0_disk1_1of2.zip -d ${_SCRATCH}/wcc && \
-	unzip ${_SCRATCH}/wcc/ofm_wcc_generic_11.1.1.9.0_disk1_2of2.zip -d ${_SCRATCH}/wcc && \
+	unzip -qq ${_SCRATCH}/wcc/ofm_wcc_generic_11.1.1.9.0_disk1_1of2.zip -d ${_SCRATCH}/wcc && \
+	unzip -qq ${_SCRATCH}/wcc/ofm_wcc_generic_11.1.1.9.0_disk1_2of2.zip -d ${_SCRATCH}/wcc && \
 	rm -rf rm -rf ${_SCRATCH}/wcc/ofm_wcc_generic_11.1.1.9.0_disk1_1of2.zip \
 	${_SCRATCH}/wcc/ofm_wcc_generic_11.1.1.9.0_disk1_2of2.zip && \
 	${_SCRATCH}/wcc/Disk1/runInstaller -silent -invPtrLoc ${_SCRATCH}/oraInst.loc \
