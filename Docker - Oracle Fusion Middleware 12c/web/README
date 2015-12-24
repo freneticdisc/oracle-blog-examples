@@ -1,9 +1,0 @@
-Login to Oracle Technology Network to download the file.
-
-http://www.oracle.com/technetwork/middleware/webtier/downloads/index.html
-
-Downloaded Files: fmw_12.2.1.0.0_ohs_linux64_Disk1_1of1.zip
-
-Also make sure that the file has appropriate file permissions
-
-chmod -R go+r *

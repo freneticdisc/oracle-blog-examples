@@ -1,0 +1,28 @@
+Login to Oracle Technology Network to download the file.
+
+JDK: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+WLS: http://www.oracle.com/technetwork/middleware/weblogic/downloads/wls-main-097127.html
+BPM: http://www.oracle.com/technetwork/middleware/bpm/downloads/index.html
+SOA: http://www.oracle.com/technetwork/middleware/soasuite/downloads/index.html
+WCC: http://www.oracle.com/technetwork/middleware/webcenter/content/downloads/index.html
+WCP: http://www.oracle.com/technetwork/middleware/webcenter/portal/downloads/index.html
+WCS: http://www.oracle.com/technetwork/middleware/webcenter/sites/downloads/index.html
+WEB: http://www.oracle.com/technetwork/middleware/webtier/downloads/index.html
+
+Downloaded Files: jdk-8u66-linux-x64.gz
+                  fmw_12.2.1.0.0_infrastructure_Disk1_1of1.zip
+                  fmw_12.2.1.0.0_bpmqs_Disk1_1of2.zip
+                  fmw_12.2.1.0.0_bpmqs_Disk1_2of2.zip
+                  fmw_12.2.1.0.0_soaqs_Disk1_1of2.zip
+                  fmw_12.2.1.0.0_soaqs_Disk1_2of2.zip
+                  fmw_12.2.1.0.0_wccontent_Disk1_1of1.zip
+                  fmw_12.2.1.0.0_wcportal_Disk1_1of1.zip
+                  fmw_12.2.1.0.0_wcsites_Disk1_1of1.zip
+                  fmw_12.2.1.0.0_ohs_linux64_Disk1_1of1.zip
+
+Java JDK and Weblogic files are required. If you do not download any of the
+other files, that product will not be installed.
+
+Make sure that the file has appropriate file permissions.
+
+chmod -R go+r *
