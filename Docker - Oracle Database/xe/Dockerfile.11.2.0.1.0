@@ -13,7 +13,7 @@ RUN yum update -y -q && \
 	libstdc++-devel libXext libXtst libXi openmotif openmotif22 redhat-lsb \
 	sysstat zlib zlib.i686 libX11 libX11.i686 unzip xorg-x11-utils xorg-x11-xauth
 
-RUN unzip ${_SCRATCH}/db/oracle-xe-11.2.0-1.0.x86_64.rpm.zip -d ${_SCRATCH}/db && \
+RUN unzip -qq ${_SCRATCH}/db/oracle-xe-11.2.0-1.0.x86_64.rpm.zip -d ${_SCRATCH}/db && \
 	rpm -ivh ${_SCRATCH}/db/Disk1/oracle-xe-11.2.0-1.0.x86_64.rpm && \
 	sed -i "s/ORACLE_PASSWORD=<value required>/ORACLE_PASSWORD=${PASSWORD}/g" \
 	${_SCRATCH}/db/Disk1/response/xe.rsp && \
