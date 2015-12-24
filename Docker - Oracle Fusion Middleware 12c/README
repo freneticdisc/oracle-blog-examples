@@ -1,0 +1,126 @@
+Docker Images for Oracle Fusion Middleware (12.2.1.0.0)
+Version: 1.0.0
+Updated: 12/28/2015
+--------------------------------------------------------------------
+
+This project contains the Dockerfiles and the corresponding directory structures
+needed to build Docker containers for WebCenter Portal and Content.
+
+To build an image for use, follow the instructions below:
+
+1. Create a base directory for your Docker context.
+    mkdir ~/webcenter
+    
+2. Create the following directories under the Docker context directory. You may
+   not need all of these directories depending on the image you are trying to
+   build.
+    cd ~/webcenter
+    mkdir jdk wls rcu wcc wcp
+    
+3. Download the required software packages into the directories we created in
+   the previous step. At the time of the creation of this README, the following
+   installers and patched were available. The instruction on where to download
+   these files are in READMEs in those directories.
+    ~/webcenter/jdk/p21984104_17091_Linux-x86-64.zip
+    ~/webcenter/wls/wls1036_generic.jar
+    ~/webcenter/wls/p20780171_1036_Generic.zip
+    ~/webcenter/wls/silent.xml
+    ~/webcenter/rcu/ofm_rcu_linux_11.1.1.9.0_64_disk1_1of1.zip
+    ~/webcenter/wcc/ofm_wcc_generic_11.1.1.9.0_disk1_1of2.zip
+    ~/webcenter/wcc/ofm_wcc_generic_11.1.1.9.0_disk1_2of2.zip
+    ~/webcenter/wcc/p22060967_111190_Generic.zip
+    ~/webcenter/wcc/p22249978_111190_Generic.zip
+    ~/webcenter/wcc/Dockerfile.11.1.1.9.0
+    ~/webcenter/wcc/Dockerfile.11.1.1.9.5
+    ~/webcenter/wcp/ofm_wc_generic_11.1.1.9.0_disk1_1of2.zip
+    ~/webcenter/wcp/ofm_wc_generic_11.1.1.9.0_disk1_2of2.zip
+    ~/webcenter/wcp/p21950042_111190_Generic.zip
+    ~/webcenter/wcp/Dockerfile.11.1.1.9.0
+    ~/webcenter/wcp/Dockerfile.11.1.1.9.8
+    ~/webcenter/Dockerfile.11.1.1.9.0
+    ~/webcenter/Dockerfile.latest
+    ~/webcenter/domain/*
+    ~/webcenter/scripts/*
+
+4. Make sure that all the files have the appropriate permissions.
+    chmod -R go+r ~/webcenter
+
+5. Place the Dockerfile for the image you want to build in the base directory.
+    ~/webcenter/Dockerfile.11.1.1.9.0
+        Java JDK 1.7.0_91
+        RCU 11.1.1.9.0
+        WebLogic 10.3.6.0.0
+        WebCenter Content 11.1.1.9.0
+        WebCenter Portal 11.1.1.9.0
+
+    ~/webcenter/Dockerfile.latest
+        Java JDK 1.7.0_91
+        RCU 11.1.1.9.0
+        WebLogic 10.3.6.0.12
+        WebCenter Content 11.1.1.9.5
+        WebCenter Portal 11.1.1.9.8
+        
+    ~/webcenter/wcc/Dockerfile.11.1.1.9.0
+        Java JDK 1.7.0_91
+        RCU 11.1.1.9.0
+        WebLogic 10.3.6.0.0
+        WebCenter Content 11.1.1.9.0
+
+    ~/webcenter/wcc/Dockerfile.11.1.1.9.5
+        Java JDK 1.7.0_91
+        RCU 11.1.1.9.0
+        WebLogic 10.3.6.0.12
+        WebCenter Content 11.1.1.9.5
+
+    ~/webcenter/wcp/Dockerfile.11.1.1.9.0
+        Java JDK 1.7.0_91
+        RCU 11.1.1.9.0
+        WebLogic 10.3.6.0.0
+        WebCenter Portal 11.1.1.9.0
+
+    ~/webcenter/wcp/Dockerfile.11.1.1.9.8
+        Java JDK 1.7.0_91
+        RCU 11.1.1.9.0
+        WebLogic 10.3.6.0.12
+        WebCenter Portal 11.1.1.9.8
+
+6. Run the appropriate command to build your image. Use --no-cache=true if you
+   do not want to cache intermediate images.
+    cd ~/webcenter
+    docker build -t oracle/webcenter:11.1.1.9.0 -f ~/webcenter/Dockerfile.11.1.1.9.0 .
+    docker build -t oracle/webcenter:latest -f ~/webcenter/Dockerfile.latest .
+    docker build -t oracle/webcenter/content:11.1.1.9.0 -f ~/webcenter/wcc/Dockerfile.11.1.1.9.0 .
+    docker build -t oracle/webcenter/content:11.1.1.9.5 -f ~/webcenter/wcc/Dockerfile.11.1.1.9.5 .
+    docker build -t oracle/webcenter/portal:11.1.1.9.0 -f ~/webcenter/wcp/Dockerfile.11.1.1.9.0 .
+    docker build -t oracle/webcenter/portal:11.1.1.9.8 -f ~/webcenter/wcp/Dockerfile.11.1.1.9.8 .
+
+7. After your image(s) are built, you can start creating the containers.
+   Note that the you will need to have a shared volume between all the
+   containers. This is where the admin domain will reside. You may choose
+   to mount the volume with RW permissions on the admin container and mount
+   the volume with R permissions on the managed server containers.
+
+8. To start a container running the admin server, run the following command:
+    docker run -d -P --name=adminserver \
+    -v /Volumes/aserver:/u01/app/oracle/admin/aserver:rw \
+    -t oracle/webcenter:latest /bin/sh /u01/app/oracle/admin/tools/scripts/start_server.sh \
+    adminserver
+    
+9. After the container has started and the Admin Server is up, login to the
+   Admin Console and update all the data sources that you intend to use with
+   the correct values for the JDBC URL, username and password. No restart of
+   the Admin Server will be required as no data sources are targeted to it.
+   RCU is packaged within the docker image so you can start an interactive
+   container and run the RCU in command line mode.
+
+10. To start a container running a managed server, run the following command:
+    docker run -d -P --name=mserver_${SERVICE} \
+    -v /Volumes/aserver:/u01/app/oracle/admin/aserver:ro \
+    -t oracle/webcenter:latest /bin/sh /u01/app/oracle/admin/tools/scripts/start_server.sh \
+    ${SERVICE_ID} ${ADMIN_SERVER_URL}
+    
+    SERVICE - Any name to identify the container with the service you are
+              running on it
+    SERVICE_ID - can be any one of the following: capture, ibr, ipm, irm, ssxa,
+                 ucm, urm, collaboration, portlet, spaces, utilities
+    ADMIN_SERVER_URL - t3://${IP_ADDRESS_OF_ADMIN_CONTAINER}:7001

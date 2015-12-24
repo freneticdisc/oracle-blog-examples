@@ -1,0 +1,10 @@
+Login to Oracle Technology Network to download the file.
+
+http://www.oracle.com/technetwork/middleware/soasuite/downloads/index.html
+
+Downloaded Files: fmw_12.2.1.0.0_soaqs_Disk1_1of2.zip
+                  fmw_12.2.1.0.0_soaqs_Disk1_2of2.zip
+
+Also make sure that the file has appropriate file permissions
+
+chmod -R go+r *

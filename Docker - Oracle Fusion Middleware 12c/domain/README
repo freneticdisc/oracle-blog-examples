@@ -1,0 +1,9 @@
+Required Files: docker_domain_admin.jar
+                docker_domain_managed.jar
+
+These are the domain templates that can be either unpacked or user within
+config.sh to create a new domain based on it.
+
+Also make sure that the file has appropriate file permissions
+
+chmod -R go+r *

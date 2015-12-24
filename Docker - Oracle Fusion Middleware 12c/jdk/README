@@ -1,0 +1,9 @@
+Login to Oracle Technology Network to download the file.
+
+http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+Downloaded Files: jdk-8u66-linux-x64.gz
+
+Also make sure that the file has appropriate file permissions
+
+chmod -R go+r *

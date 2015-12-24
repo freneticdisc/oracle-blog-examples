@@ -1,0 +1,11 @@
+Login to Oracle Technology Network to download the file.
+
+http://www.oracle.com/technetwork/middleware/weblogic/downloads/wls-main-097127.html
+
+Downloaded Files: fmw_12.2.1.0.0_infrastructure_Disk1_1of1.zip
+
+The silent.xml file is part of this project.
+
+Also make sure that the file has appropriate file permissions
+
+chmod -R go+r *
