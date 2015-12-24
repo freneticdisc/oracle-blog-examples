@@ -1,6 +1,6 @@
 Docker Images for Oracle Fusion Middleware (12.2.1.0.0)
 Version: 1.0.0
-Updated: 12/28/2015
+Updated: 12/24/2015
 --------------------------------------------------------------------
 
 This project contains the Dockerfiles and the corresponding directory structures
@@ -21,18 +21,17 @@ To build an image for use, follow the instructions below:
    the previous step. At the time of the creation of this README, the following
    installers were available. The instruction on where to download
    these files are in README in the installers directory.
-    ~/fmw/wls/silent.xml
-    ~/fmw/jdk-8u66-linux-x64.gz
-    ~/fmw/fmw_12.2.1.0.0_infrastructure_Disk1_1of1.zip
-    ~/fmw/fmw_12.2.1.0.0_bpmqs_Disk1_1of2.zip
-    ~/fmw/fmw_12.2.1.0.0_bpmqs_Disk1_2of2.zip
-    ~/fmw/fmw_12.2.1.0.0_soaqs_Disk1_1of2.zip
-    ~/fmw/fmw_12.2.1.0.0_soaqs_Disk1_2of2.zip
-    ~/fmw/fmw_12.2.1.0.0_wccontent_Disk1_1of1.zip
-    ~/fmw/fmw_12.2.1.0.0_wcportal_Disk1_1of1.zip
-    ~/fmw/fmw_12.2.1.0.0_wcsites_Disk1_1of1.zip
-    ~/fmw/fmw_12.2.1.0.0_ohs_linux64_Disk1_1of1.zip
-    ~/fmw/wls/silent.xml
+    ~/fmw/installers/jdk-8u66-linux-x64.gz
+    ~/fmw/installers/fmw_12.2.1.0.0_infrastructure_Disk1_1of1.zip
+    ~/fmw/installers/fmw_12.2.1.0.0_bpmqs_Disk1_1of2.zip
+    ~/fmw/installers/fmw_12.2.1.0.0_bpmqs_Disk1_2of2.zip
+    ~/fmw/installers/fmw_12.2.1.0.0_soaqs_Disk1_1of2.zip
+    ~/fmw/installers/fmw_12.2.1.0.0_soaqs_Disk1_2of2.zip
+    ~/fmw/installers/fmw_12.2.1.0.0_wccontent_Disk1_1of1.zip
+    ~/fmw/installers/fmw_12.2.1.0.0_wcportal_Disk1_1of1.zip
+    ~/fmw/installers/fmw_12.2.1.0.0_wcsites_Disk1_1of1.zip
+    ~/fmw/installers/fmw_12.2.1.0.0_ohs_linux64_Disk1_1of1.zip
+    ~/fmw/installers/silent.rsp
     ~/fmw/domain/*
     ~/fmw/scripts/*
 
