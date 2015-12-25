@@ -30,10 +30,18 @@ SOFTWARE_UPDATES_PROXY_USER=
 SOFTWARE_UPDATES_PROXY_PASSWORD=<SECURE VALUE>
 
 #The oracle home location. This can be an existing Oracle Home or a new Oracle Home
-ORACLE_HOME=/u01/app/oracle/middleware
+#ORACLE_HOME=/u01/app/oracle/middleware
 
-#Set this variable value to the Installation Type selected. e.g. Fusion Middleware Infrastructure, Fusion Middleware Infrastructure With Examples.
-INSTALL_TYPE=Fusion Middleware Infrastructure
+#Set this variable value to the Installation Type selected.
+#INSTALL_TYPE=Fusion Middleware Infrastructure
+#INSTALL_TYPE=Fusion Middleware Infrastructure With Examples
+#INSTALL_TYPE=WebCenter Content
+#INSTALL_TYPE=WebCenter Portal
+#INSTALL_TYPE=WebCenter Portal SOA Composites
+#INSTALL_TYPE=WebCenter Sites, WebCenter Sites - With Examples
+#INSTALL_TYPE=WebCenter Sites - Satellite Server
+#INSTALL_TYPE=Standalone HTTP Server (Managed independently of WebLogic server)
+#INSTALL_TYPE=Colocated HTTP Server (Managed through WebLogic server)
 
 #Provide the My Oracle Support Username. If you wish to ignore Oracle Configuration Manager configuration provide empty string for user name.
 MYORACLESUPPORT_USERNAME=
