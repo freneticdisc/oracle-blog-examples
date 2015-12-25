@@ -11,7 +11,7 @@ COPY installers ${_SCRATCH}\
 COPY domain ${_SCRATCH}/domain/
 COPY scripts ${_SCRATCH}/scripts/
 
-RUN yum update -y -q && \
+RUN	yum update -y -q && \
 	yum install -y -q binutils compat-libcap1 compat-libstdc++-33 \
 	compat-libstdc++-33.i686 gcc gcc-c++ glibc glibc-devel glibc-devel.i686 \
 	libaio libaio-devel libgcc libgcc.i686 libstdc++ libstdc++.i686 \
@@ -26,7 +26,7 @@ RUN yum update -y -q && \
 
 USER oracle
 
-RUN mkdir -p ${JDK_HOME} ${FMW_HOME} && \
+RUN	mkdir -p ${JDK_HOME} ${FMW_HOME} && \
 	echo "inventory_loc=${FMW_HOME}/oraInventory" > ${_SCRATCH}/oraInst.loc && \
 	echo "inst_group=oinstall" >> ${_SCRATCH}/oraInst.loc && \
 	tar xzf ${_SCRATCH}/jdk-8u66-linux-x64.gz -C ${JDK_HOME} --strip-components=1 && \
