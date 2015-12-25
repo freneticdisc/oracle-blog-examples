@@ -1,4 +1,4 @@
-FROM oraclelinux:6
+FROM oraclelinux:7
 MAINTAINER Justin Paul <justin.paul@oracle.com>
 
 ENV _SCRATCH /tmp/scratch
