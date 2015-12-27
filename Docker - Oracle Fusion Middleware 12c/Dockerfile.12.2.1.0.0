@@ -7,8 +7,8 @@ ENV JDK_HOME ${ORA_HOME}/jdk
 ENV FMW_HOME ${ORA_HOME}/middleware
 ENV ADM_HOME ${ORA_HOME}/admin
 
-COPY domain ${_SCRATCH}/domain/
-COPY scripts ${_SCRATCH}/scripts/
+# COPY domain ${_SCRATCH}/domain/
+# COPY scripts ${_SCRATCH}/scripts/
 COPY installers ${_SCRATCH}/
 
 RUN	yum update -y -q && \
