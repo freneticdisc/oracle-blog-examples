@@ -49,7 +49,7 @@ RUN	[[ -f ${_SCRATCH}/fmw_12.2.1.0.0_bpmqs_Disk1_1of2.zip ]] && \
 	rm -rf ${_SCRATCH}/fmw_12.2.1.0.0_bpmqs_Disk1_1of2.zip \
 	${_SCRATCH}/fmw_12.2.1.0.0_bpmqs_Disk1_2of2.zip \
 	${_SCRATCH}/fmw_12.2.1.0.0_bpm_quickstart.jar \
-	${_SCRATCH}/fmw_12.2.1.0.0_bpm_quickstart2.jar \
+	${_SCRATCH}/fmw_12.2.1.0.0_bpm_quickstart2.jar && \
 	export BPM_INSTALLED=1
 
 RUN	[[ -z ${BPM_INSTALLED} ]] && \
